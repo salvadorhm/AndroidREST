@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AcmeStore</string>
+    <string name="title">Product List</string>
+</resources>
