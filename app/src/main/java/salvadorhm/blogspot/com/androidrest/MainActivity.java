@@ -1,11 +1,13 @@
 package salvadorhm.blogspot.com.androidrest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView lv_products_list;
     private TextView tv_title;
+    private Button btn_search_activity;
     private ArrayAdapter adapter;
-    private String getAllContactsURL = "https://acmestore.herokuapp.com/json";
+    private String getAllContactsURL = "https://acmestore.herokuapp.com/json?user_hash=12345";
+    //private String getAllContactsURL = "http://10.42.0.63:8080/json?user_hash=12345";
 
 
     @Override
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setOnClickListener(onClickListener);
 
+        btn_search_activity = (Button) findViewById(R.id.btn_search_activity);
+        btn_search_activity.setOnClickListener(onClickListener);
+
         webServiceRest(getAllContactsURL);
         Log.i("url", getAllContactsURL);
     }
@@ -46,8 +53,18 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             if(v == tv_title)
                 webServiceRest(getAllContactsURL);
+            else if(v == btn_search_activity)
+                btn_search_onClick();
         }
     };
+
+    private void btn_search_onClick(){
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+        Log.i("Activity Search","activity search");
+
+
+    }
 
     private void webServiceRest(String requestURL){
         try{
@@ -78,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         String precio_compra;
         String precio_venta;
 
-        adapter.clear();
         try{
             jsonArray = new JSONArray(jsonResult);
         }catch (JSONException e){

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AcmeStore</string>
     <string name="title">Product List</string>
+    <string name="title_activity_consultas">AcmeStore Search</string>
+    <string name="id_producto">Id Product</string>
+    <string name="search">Search</string>
 </resources>
